@@ -64,7 +64,6 @@ class SimulationEngine {
         }
     }
     
-    //return payout
     func startDay() -> (isGameOver: Bool, details: String) {
         var ratio = supplies.getRatio()
         var cPayout = 0;
@@ -90,7 +89,7 @@ class SimulationEngine {
         if (supplies.iceMix == 0) {
             return (cIsGameOver, "You must have at least 1 ice cube in your mix.")
         }
-
+        
         weather.generateWeather()
         self.generateCustomers()
         
@@ -120,17 +119,33 @@ class SimulationEngine {
             customerIndex++
         }
         
-        cDetails += "\r\n\r\nYou made: $\(cPayout)" //" selling \(soldCount) lemonades"
+        cDetails += "\r\n\r\nYou made: $\(cPayout)"
         supplies.money += cPayout
         supplies.lemons -= supplies.lemonsMix
         supplies.ice -= supplies.iceMix
         supplies.resetBuyAndMix()
         
-        if supplies.money == 0 && (supplies.lemons == 0 || supplies.ice == 0) {
-            cDetails += "\r\n\r\nGAME OVER: You are out of money and lemons.  Resetting game...."
-            cIsGameOver = true
+        //check for game over condition
+        let minMoney = prices.lemons + prices.ice
+        println("minMoney = \(minMoney); money = \(supplies.money)")
+        if supplies.money < minMoney {
+            if supplies.lemons == 0 && supplies.money < prices.lemons {
+                //can't buy any more lemons so game over
+                cIsGameOver = true
+            }
+            else if supplies.ice == 0 && supplies.money < prices.ice {
+                //can't buy anymore ice so game over
+                cIsGameOver = true
+            }
+            else if supplies.lemons == 0 && supplies.lemons == 0 {
+                //need to buy both but can't afford both ingredients
+                cIsGameOver = true
+            }
+            if cIsGameOver {
+                cDetails += "\r\n\r\nGAME OVER: You are out of money and supplies.  Resetting game...."
+            }
         }
-
+        
         return (cIsGameOver, cDetails)
     }
     

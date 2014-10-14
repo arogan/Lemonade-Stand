@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var moneyLabel: UILabel!
     @IBOutlet weak var lemonLabel: UILabel!
     @IBOutlet weak var iceCubeLabel: UILabel!
@@ -33,11 +33,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-
-       simEngine = SimulationEngine(aPrices: prices, aSupplies: supplies, aWeather: weather)
-       refreshAll()
+        supplies.money = supplies.startMoney
+        simEngine = SimulationEngine(aPrices: prices, aSupplies: supplies, aWeather: weather)
+        refreshAll()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -75,7 +75,7 @@ class ViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
-
+    
     @IBAction func buyLemon(sender: UIButton) {
         if !supplies.buyLemon(prices) {
             showAlertWithText(message: "You don't have enough money.")
@@ -84,7 +84,7 @@ class ViewController: UIViewController {
             refreshAll()
         }
     }
-
+    
     @IBAction func sellLemon(sender: UIButton) {
         if !supplies.sellLemon(prices) {
             showAlertWithText(message: "You don't have any lemons to sell.")
@@ -99,7 +99,7 @@ class ViewController: UIViewController {
             showAlertWithText(message: "You don't have enough money.")
         }
         else {
-         refreshAll()        }
+            refreshAll()        }
     }
     
     @IBAction func sellIce(sender: UIButton) {
@@ -107,7 +107,7 @@ class ViewController: UIViewController {
             showAlertWithText(message: "You don't have any ice cubes to sell.")
         }
         else {
-           refreshAll()        }
+            refreshAll()        }
     }
     
     @IBAction func addLemon(sender: UIButton) {
@@ -115,7 +115,7 @@ class ViewController: UIViewController {
             showAlertWithText(message: "You don't have anymore lemons to add.")
         }
         else {
-           refreshAll()
+            refreshAll()
         }
     }
     
@@ -129,7 +129,7 @@ class ViewController: UIViewController {
             showAlertWithText(message: "You don't have anymore ice cubes to add.")
         }
         else {
-         refreshAll()
+            refreshAll()
         }
     }
     
@@ -149,4 +149,3 @@ class ViewController: UIViewController {
     
     
 }
-

@@ -9,6 +9,8 @@
 import Foundation
 
 class Supplies {
+    let startMoney = 10
+    
     var money = 10
     var lemons = 0
     var ice = 0
@@ -145,6 +147,6 @@ class Supplies {
         resetBuyAndMix()
         lemons = 0
         ice = 0
-        money = 10
-    }    
+        money = startMoney
+    }
 }

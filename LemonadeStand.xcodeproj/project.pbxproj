@@ -423,6 +423,7 @@
 				9F67984419EC2251008A1A67 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9F67984519EC2251008A1A67 /* Build configuration list for PBXNativeTarget "LemonadeStandTests" */ = {
 			isa = XCConfigurationList;
@@ -431,6 +432,7 @@
 				9F67984719EC2251008A1A67 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
